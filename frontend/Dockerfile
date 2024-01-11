@@ -2,10 +2,10 @@ FROM node:18 as builder
 
 WORKDIR /app/frontend
 
-COPY package*.json ./
+COPY ./time-travel-agency/package*.json ./
 RUN npm install
 
-COPY . .
+COPY ./time-travel-agency .
 
 RUN npm run build
 
