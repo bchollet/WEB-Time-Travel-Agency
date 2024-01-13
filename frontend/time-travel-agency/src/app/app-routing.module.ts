@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: '', component: DashboardComponent },
   { path: 'departure-board', component: DepartureBoardComponent },
   { path: 'create-journey/:id', component: CreateJourneyComponent },
+  { path: 'create-journey', component: CreateJourneyComponent },
   { path: '**', redirectTo: '' },
 ];
 

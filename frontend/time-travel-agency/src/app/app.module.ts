@@ -18,6 +18,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTableModule } from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { MatTableModule } from '@angular/material/table';
     MatIconModule,
     MatExpansionModule,
     MatTableModule,
+    MatInputModule,
+    MatSelectModule,
   ],
   providers: [JourneyService],
   bootstrap: [AppComponent],
