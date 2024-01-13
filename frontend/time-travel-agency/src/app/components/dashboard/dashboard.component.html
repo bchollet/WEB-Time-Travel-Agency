@@ -1,11 +1,151 @@
-<p>dashboard works!</p>
-<section>
-  <div class="example-button-row">
-    <button mat-raised-button>Basic</button>
-    <button mat-raised-button color="primary">Primary</button>
-    <button mat-raised-button color="accent">Accent</button>
-    <button mat-raised-button color="warn">Warn</button>
-    <button mat-raised-button disabled>Disabled</button>
-    <a mat-raised-button href="https://www.google.com/" target="_blank">Link</a>
+<div class="main-content center-column">
+  <img
+    src="assets/app_banner.png"
+    alt="app banner"
+    class="dashboard-element app-banner" />
+
+  <p class="mat-headline-6 italic">
+    "Step into the extraordinary with Time Travel Agency, the premier leaders in
+    time-travel experiences. Being the best is not just a goal, it's our
+    standard." - <span class="mat-subtitle-1">Bastian Chollet (CEO)</span>
+  </p>
+
+  <mat-card class="dashboard-element create-card">
+    <mat-card-content class="start-row">
+      <img
+        class="card-image"
+        mat-card-image
+        src="assets/travels.jpg"
+        alt="map picture" />
+      <div class="card-padding">
+        <p class="mat-headline-5">
+          Begin Crafting Time Journeys Now! Your Adventure Awaits 🚀✨
+        </p>
+        <button mat-fab color="primary" aria-label="plus icon">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <div class="info-cards start-row">
+    <mat-card>
+      <img
+        class="card-image"
+        mat-card-image
+        src="assets/destination.jpg"
+        alt="map with strings illustrating travels" />
+      <mat-card-content class="card-padding">
+        <p class="mat-headline-4">Destinations</p>
+        <p class="mat-subtitle-1">
+          Explore every era, relive history's defining moments! With our time
+          travel app, journey through time and witness extraordinary events.
+        </p>
+      </mat-card-content>
+      <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-description>
+            Available Destinations
+            <mat-icon>map</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div>
+          <div class="grid-container">
+            <div class="grid-item">
+              <img
+                class="card-image"
+                mat-card-image
+                src="assets/placeholder.jpg"
+                alt="Photo of Pelison" />
+              <p>Pelison 1</p>
+            </div>
+            <div class="grid-item">
+              <img
+                class="card-image"
+                mat-card-image
+                src="assets/placeholder.jpg"
+                alt="Photo of Pelison" />
+              <p>Pelison 2</p>
+            </div>
+            <div class="grid-item">
+              <img
+                class="card-image"
+                mat-card-image
+                src="assets/placeholder.jpg"
+                alt="Photo of Pelison" />
+              <p>Pelison 3</p>
+            </div>
+            <div class="grid-item">
+              <img
+                class="card-image"
+                mat-card-image
+                src="assets/placeholder.jpg"
+                alt="Photo of Pelison" />
+              <p>Pelison 4</p>
+            </div>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-card>
+
+    <mat-card>
+      <img
+        class="card-image"
+        mat-card-image
+        src="assets/guide.jpg"
+        alt="playmobil on a hike" />
+      <mat-card-content class="card-padding">
+        <p class="mat-headline-4">Guides</p>
+        <p class="mat-subtitle-1">
+          Meet our fearless time travel guides - your key to extraordinary
+          adventures through the ages. Uncover the past, glimpse the future, all
+          with the courage of our expert companions.
+        </p>
+      </mat-card-content>
+      <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-description>
+            Available Guides
+            <mat-icon>account_circle</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div>
+          <div class="grid-container">
+            <div class="grid-item">
+              <img
+                class="card-image"
+                mat-card-image
+                src="assets/placeholder.jpg"
+                alt="Photo of Pelison" />
+              <p>Pelison 1</p>
+            </div>
+            <div class="grid-item">
+              <img
+                class="card-image"
+                mat-card-image
+                src="assets/placeholder.jpg"
+                alt="Photo of Pelison" />
+              <p>Pelison 2</p>
+            </div>
+            <div class="grid-item">
+              <img
+                class="card-image"
+                mat-card-image
+                src="assets/placeholder.jpg"
+                alt="Photo of Pelison" />
+              <p>Pelison 3</p>
+            </div>
+            <div class="grid-item">
+              <img
+                class="card-image"
+                mat-card-image
+                src="assets/placeholder.jpg"
+                alt="Photo of Pelison" />
+              <p>Pelison 4</p>
+            </div>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-card>
   </div>
-</section>
+</div>
