@@ -14,6 +14,7 @@ CREATE TABLE Journey (
     id SERIAL, 
 	startDate DATE NOT NULL, 
     endDate DATE,
+    client_id INT NOT NULL,
     historical_period_id INT NOT NULL,
     life_insurance_id INT NOT NULL,
     guide_id INT NOT NULL,
@@ -37,7 +38,8 @@ CREATE TABLE HistoricalPeriod (
 DROP TABLE IF EXISTS LifeInsurance CASCADE;
 CREATE TABLE LifeInsurance (
     id SERIAL, 
-    title TEXT NOT NULL,
+    title VARCHAR(10) NOT NULL,
+    description TEXT NOT NULL,
     price DECIMAL(8,2) NOT NULL,
 	corporal_integrity BOOLEAN NOT NULL,
 	rescue_team BOOLEAN NOT NULL,
@@ -63,6 +65,13 @@ CREATE TABLE Location (
 );
 
 /* ======================== FOREIGN KEYS ================================= */
+/* ----------------------------------------------------------------------- */
+ALTER TABLE Journey
+   ADD CONSTRAINT FK_Journey_Client
+      FOREIGN KEY (client_id)
+         REFERENCES Client (id)
+ON UPDATE CASCADE;
+/* ----------------------------------------------------------------------- */
 ALTER TABLE Journey
    ADD CONSTRAINT FK_Journey_HistoricalPeriod
       FOREIGN KEY (historical_period_id)
@@ -115,11 +124,11 @@ INSERT INTO Location (id, city, country) VALUES (0,'Yorktown', 'United States');
 INSERT INTO Location (id, city, country) VALUES (1,'Paris', 'France');
 
 /* ---------------------------------Life insurance  ------------------------ */
-INSERT INTO LifeInsurance (title, price, corporal_integrity, rescue_team, way_back_ensured, actions_persistence) VALUES ('no life insurance', 0, FALSE, FALSE, FALSE, FALSE);
-INSERT INTO LifeInsurance (title, price, corporal_integrity, rescue_team, way_back_ensured, actions_persistence) VALUES ('you can at least come back', 100, FALSE, FALSE, TRUE, FALSE);
-INSERT INTO LifeInsurance (title, price, corporal_integrity, rescue_team, way_back_ensured, actions_persistence) VALUES ('you come back in one piece', 5000, TRUE, FALSE, TRUE, FALSE);
-INSERT INTO LifeInsurance (title, price, corporal_integrity, rescue_team, way_back_ensured, actions_persistence) VALUES ('you wont spend all your life stuck in a medieval prison', 5000, FALSE, TRUE, TRUE, FALSE);
-INSERT INTO LifeInsurance (title, price, corporal_integrity, rescue_team, way_back_ensured, actions_persistence) VALUES ('you wont create a time paradox', 100000, TRUE, FALSE, TRUE, TRUE);
+INSERT INTO LifeInsurance (title, description, price, corporal_integrity, rescue_team, way_back_ensured, actions_persistence) VALUES ('NONE', 'no life insurance', 0, FALSE, FALSE, FALSE, FALSE);
+INSERT INTO LifeInsurance (title, description, price, corporal_integrity, rescue_team, way_back_ensured, actions_persistence) VALUES ('BASIC' 'you can at least come back', 100, FALSE, FALSE, TRUE, FALSE);
+INSERT INTO LifeInsurance (title, description, price, corporal_integrity, rescue_team, way_back_ensured, actions_persistence) VALUES ('LIMITED', 'you come back in one piece', 5000, TRUE, FALSE, TRUE, FALSE);
+INSERT INTO LifeInsurance (title, description, price, corporal_integrity, rescue_team, way_back_ensured, actions_persistence) VALUES ('ADVANCED', 'you wont spend all your life stuck in a medieval prison', 5000, FALSE, TRUE, TRUE, FALSE);
+INSERT INTO LifeInsurance (title, description, price, corporal_integrity, rescue_team, way_back_ensured, actions_persistence) VALUES ('TOTAL', 'you wont create a time paradox', 100000, TRUE, FALSE, TRUE, TRUE);
 
 /* ---------------------------------Location  ----------------------------- */
 INSERT INTO HistoricalPeriod (name, description, danger_level, arrival_date, location_id)
