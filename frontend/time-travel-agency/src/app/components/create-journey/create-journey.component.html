@@ -1,36 +1,34 @@
 <div class="main">
   <p class="mat-headline-5">Plan a journey</p>
-  <form *ngIf="!loadingData">
-    <mat-form-field class="full-input">
-      <mat-label>Client</mat-label>
-      <mat-select>
-        <ng-container *ngFor="let client of info.clients">
-          <mat-option [value]="client.id"
-            >{{ client.firstname }} {{ client.lastname }}</mat-option
-          >
-        </ng-container>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field class="full-input">
-      <mat-label>Historical Period</mat-label>
-      <mat-select>
-        <ng-container *ngFor="let period of info.historicalPeriods">
-          <mat-option [value]="period.id">{{ period.name }}</mat-option>
-        </ng-container>
-      </mat-select>
-    </mat-form-field>
+  <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+  <form
+    [formGroup]="journeyForm"
+    *ngIf="!loading && info !== null"
+    (ngSubmit)="onSubmit()">
     <table class="full-input" cellspacing="0">
       <tr>
         <td>
-          <mat-form-field class="cell-input">
-            <mat-label>Departure Date</mat-label>
-            <input matInput />
+          <mat-form-field class="full-input">
+            <mat-label>Client</mat-label>
+            <mat-select formControlName="client">
+              <ng-container *ngFor="let client of info.clients">
+                <mat-option [value]="client.id"
+                  >{{ client.firstname }} {{ client.lastname }}</mat-option
+                >
+              </ng-container>
+            </mat-select>
+            <mat-icon matSuffix>tag_faces</mat-icon>
           </mat-form-field>
         </td>
         <td>
           <mat-form-field class="cell-input">
-            <mat-label>Arrival Date</mat-label>
-            <input matInput />
+            <mat-label>Guide</mat-label>
+            <mat-select formControlName="guide">
+              <ng-container *ngFor="let guide of info.guides">
+                <mat-option [value]="guide.id">{{ guide.surname }}</mat-option>
+              </ng-container>
+            </mat-select>
+            <mat-icon matSuffix>face</mat-icon>
           </mat-form-field>
         </td>
       </tr>
@@ -39,27 +37,60 @@
       <tr>
         <td>
           <mat-form-field class="cell-input">
-            <mat-label>Guide</mat-label>
-            <mat-select>
-              <ng-container *ngFor="let guide of info.guides">
-                <mat-option [value]="guide.id">{{ guide.surname }}</mat-option>
+            <mat-label>Departure date</mat-label>
+            <input
+              matInput
+              [matDatepicker]="startDate"
+              formControlName="startDate" />
+            <mat-datepicker-toggle matIconSuffix [for]="startDate">
+              <mat-icon matDatepickerToggleIcon>flight_takeoff</mat-icon>
+            </mat-datepicker-toggle>
+            <mat-datepicker #startDate></mat-datepicker>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field class="cell-input">
+            <mat-label>Arrival date</mat-label>
+            <input
+              formControlName="endDate"
+              matInput
+              [matDatepicker]="endDate" />
+            <mat-datepicker-toggle matIconSuffix [for]="endDate">
+              <mat-icon matDatepickerToggleIcon>flight_land</mat-icon>
+            </mat-datepicker-toggle>
+            <mat-datepicker #endDate></mat-datepicker>
+          </mat-form-field>
+        </td>
+      </tr>
+    </table>
+    <table class="full-input" cellspacing="0">
+      <tr>
+        <td>
+          <mat-form-field class="full-input">
+            <mat-label>Historical Period</mat-label>
+            <mat-select formControlName="historicalPeriod">
+              <ng-container *ngFor="let period of info.historicalPeriods">
+                <mat-option [value]="period.id">{{ period.name }}</mat-option>
               </ng-container>
             </mat-select>
+            <mat-icon matSuffix>location_on</mat-icon>
           </mat-form-field>
         </td>
         <td>
           <mat-form-field class="cell-input">
             <mat-label>Life insurance</mat-label>
-            <mat-select>
+            <mat-select formControlName="lifeInsurance">
               <ng-container *ngFor="let insurance of info.lifeInsurances">
                 <mat-option [value]="insurance.id">{{
                   insurance.title
                 }}</mat-option>
               </ng-container>
             </mat-select>
+            <mat-icon matSuffix>assignment_turned_in</mat-icon>
           </mat-form-field>
         </td>
       </tr>
     </table>
+    <button mat-flat-button type="submit">Allons Y !!</button>
   </form>
 </div>
