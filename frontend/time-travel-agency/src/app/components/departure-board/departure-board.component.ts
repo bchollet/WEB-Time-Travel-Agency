@@ -17,6 +17,6 @@ export class DepartureBoardComponent {
     'edit',
     'delete',
   ];
-  dataSource = this.journeyService.DUMMY_JOURNEY_DATA;
+  dataSource = [];
   constructor(private journeyService: JourneyService) {}
 }

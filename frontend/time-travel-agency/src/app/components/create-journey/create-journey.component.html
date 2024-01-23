@@ -1,23 +1,24 @@
 <div class="main">
   <p class="mat-headline-5">Plan a journey</p>
-  <form>
+  <form *ngIf="!loadingData">
     <mat-form-field class="full-input">
       <mat-label>Client</mat-label>
       <mat-select>
-        <mat-option value="option1">Bastian</mat-option>
-        <mat-option value="option2" disabled>Elliot</mat-option>
+        <ng-container *ngFor="let client of info.clients">
+          <mat-option [value]="client.id"
+            >{{ client.firstname }} {{ client.lastname }}</mat-option
+          >
+        </ng-container>
       </mat-select>
     </mat-form-field>
-
     <mat-form-field class="full-input">
       <mat-label>Historical Period</mat-label>
       <mat-select>
-        <mat-option value="option1">World War I</mat-option>
-        <mat-option value="option2" disabled>Medieval Europe</mat-option>
-        <mat-option value="option3">Roaring Twenties</mat-option>
+        <ng-container *ngFor="let period of info.historicalPeriods">
+          <mat-option [value]="period.id">{{ period.name }}</mat-option>
+        </ng-container>
       </mat-select>
     </mat-form-field>
-
     <table class="full-input" cellspacing="0">
       <tr>
         <td>
@@ -34,16 +35,15 @@
         </td>
       </tr>
     </table>
-
     <table class="full-input" cellspacing="0">
       <tr>
         <td>
           <mat-form-field class="cell-input">
             <mat-label>Guide</mat-label>
             <mat-select>
-              <mat-option value="option1">Fabien</mat-option>
-              <mat-option value="option2" disabled>Yassoun</mat-option>
-              <mat-option value="option3">JHH</mat-option>
+              <ng-container *ngFor="let guide of info.guides">
+                <mat-option [value]="guide.id">{{ guide.surname }}</mat-option>
+              </ng-container>
             </mat-select>
           </mat-form-field>
         </td>
@@ -51,9 +51,11 @@
           <mat-form-field class="cell-input">
             <mat-label>Life insurance</mat-label>
             <mat-select>
-              <mat-option value="option1">NONE</mat-option>
-              <mat-option value="option2" disabled>BASIC</mat-option>
-              <mat-option value="option3">LIMITED</mat-option>
+              <ng-container *ngFor="let insurance of info.lifeInsurances">
+                <mat-option [value]="insurance.id">{{
+                  insurance.title
+                }}</mat-option>
+              </ng-container>
             </mat-select>
           </mat-form-field>
         </td>
