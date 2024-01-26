@@ -4,7 +4,7 @@ This application is made using Node.js and Angular. You will need npm and the ng
 ## Run with Docker
 To run the whole application (backend, frontend, database) using docker go into the root of the project and run:
 
-```bash
+ ```bash
 docker-compose up
 ```
 the app should run and can be accessed through http://localhost:8000
