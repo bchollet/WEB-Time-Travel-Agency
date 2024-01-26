@@ -6,6 +6,6 @@ import {LifeInsurance} from "./lifeInsurance";
 export interface FormInfo {
     guides: Guide[];
     clients: Client[];
-    HistoricalPeriods: HistoricalPeriod[];
-    LifeInsurances: LifeInsurance[];
+    historicalPeriods: HistoricalPeriod[];
+    lifeInsurances: LifeInsurance[];
 }
