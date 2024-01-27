@@ -23,7 +23,7 @@ app.get('/journey', (req, res) => {
   });
 });
 app.get('/journey/:id', (req, res) => {
-  getJourneyById(+req.params.id).then(journey => {
+  getJourneyById(parseInt(req.params.id)).then(journey => {
     res.status(200);
     res.send(journey);
   });

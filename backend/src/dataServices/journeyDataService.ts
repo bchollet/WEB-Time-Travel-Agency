@@ -14,7 +14,8 @@ export async function findAllJourneys(): Promise<JourneyDAO[]> {
 }
 
 export async function findJourneyById(id: number): Promise<JourneyDAO> {
-  return await db.any(
+  console.debug(`findJourneyById(${id})`);
+  return await db.one(
     `SELECT *
                          FROM journey
                                   JOIN client c on journey.client_id = c.id
