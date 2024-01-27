@@ -31,6 +31,16 @@ export interface JourneyDAO {
   biography: string;
 }
 
+export interface UpdateJourneyDAO {
+  id: number;
+  start_date: Date;
+  end_date: Date;
+  client_id: number;
+  historical_period_id: number;
+  life_insurance_id: number;
+  guide_id: number;
+}
+
 export interface Journey {
   id: number;
   startDate: Date;

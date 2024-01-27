@@ -45,5 +45,8 @@ export async function getFormInfo(): Promise<FormInfo> {
         }),
       };
     }
-  );
+  ).catch((error) => {
+    console.error(error);
+    return null;
+  });
 }

@@ -1,5 +1,5 @@
 import { db } from '../config/dbConfig';
-import { JourneyDAO } from '../models/journey';
+import { JourneyDAO, UpdateJourneyDAO } from '../models/journey';
 
 export async function findAllJourneys(): Promise<JourneyDAO[]> {
   return await db.any(`SELECT hp.description as hp_description,
@@ -27,7 +27,7 @@ export async function findJourneyById(id: number): Promise<JourneyDAO> {
   );
 }
 
-export async function createJourney(journey: JourneyDAO) {
+export async function createJourney(journey: JourneyDAO): Promise<JourneyDAO> {
   return await db.one(
     `INSERT INTO journey (
                                               start_date,
@@ -45,6 +45,28 @@ export async function createJourney(journey: JourneyDAO) {
       journey.historical_period_id,
       journey.life_insurance_id,
       journey.guide_id,
+    ]
+  );
+}
+
+export async function updateJourney(journey: UpdateJourneyDAO) {
+  return await db.one(
+    `UPDATE journey
+                         SET start_date = $1,
+                             end_date = $2,
+                             client_id = $3,
+                             historical_period_id = $4,
+                             life_insurance_id = $5,
+                             guide_id = $6
+                         WHERE id = $7`,
+    [
+      journey.start_date,
+      journey.end_date,
+      journey.client_id,
+      journey.historical_period_id,
+      journey.life_insurance_id,
+      journey.guide_id,
+      journey.id,
     ]
   );
 }
