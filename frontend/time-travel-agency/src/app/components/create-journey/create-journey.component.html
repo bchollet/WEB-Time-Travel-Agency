@@ -25,7 +25,9 @@
             <mat-label>Guide</mat-label>
             <mat-select formControlName="guide">
               <ng-container *ngFor="let guide of info.guides">
-                <mat-option [value]="guide.id">{{ guide.surname }}</mat-option>
+                <mat-option [matTooltip]="guide.biography" [value]="guide.id">{{
+                  guide.surname
+                }}</mat-option>
               </ng-container>
             </mat-select>
             <mat-icon matSuffix>face</mat-icon>
@@ -70,7 +72,11 @@
             <mat-label>Historical Period</mat-label>
             <mat-select formControlName="historicalPeriod">
               <ng-container *ngFor="let period of info.historicalPeriods">
-                <mat-option [value]="period.id">{{ period.name }}</mat-option>
+                <mat-option
+                  [matTooltip]="periodDescription(period)"
+                  [value]="period.id"
+                  >{{ period.name }}</mat-option
+                >
               </ng-container>
             </mat-select>
             <mat-icon matSuffix>location_on</mat-icon>
@@ -81,9 +87,11 @@
             <mat-label>Life insurance</mat-label>
             <mat-select formControlName="lifeInsurance">
               <ng-container *ngFor="let insurance of info.lifeInsurances">
-                <mat-option [value]="insurance.id">{{
-                  insurance.title
-                }}</mat-option>
+                <mat-option
+                  [matTooltip]="insuranceDescription(insurance)"
+                  [value]="insurance.id"
+                  >{{ insurance.title }}</mat-option
+                >
               </ng-container>
             </mat-select>
             <mat-icon matSuffix>assignment_turned_in</mat-icon>
@@ -91,6 +99,8 @@
         </td>
       </tr>
     </table>
-    <button mat-flat-button type="submit">Allons Y !!</button>
+    <button mat-flat-button type="submit" [disabled]="!journeyForm.valid">
+      Allons Y !!
+    </button>
   </form>
 </div>

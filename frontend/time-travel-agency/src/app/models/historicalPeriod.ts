@@ -20,20 +20,17 @@ export enum DangerLevel {
   Hell,
 }
 
-// TODO remove me
-export function fakeHistoricalPeriod(): HistoricalPeriod {
-  const historicalPeriod: HistoricalPeriod = {
-    id: 0,
-    name: 'Cold war',
-    description:
-      'period of geopolitical tension between the United States and the Soviet Union',
-    dangerLevel: DangerLevel.Dangerous,
-    arrivalDate: new Date('1947-03-12'),
-    location: {
-      id: 0,
-      city: 'Berlin',
-      country: 'Germany',
-    },
-  };
-  return historicalPeriod;
+export function dangerLevelToString(level: DangerLevel): string {
+  switch (level) {
+    case DangerLevel.Chill:
+      return 'Chill';
+    case DangerLevel.Safe:
+      return 'Safe';
+    case DangerLevel.Dangerous:
+      return 'Dangerous';
+    case DangerLevel.Hell:
+      return 'Hell';
+    default:
+      return 'Unknown Danger Level';
+  }
 }
