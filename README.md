@@ -257,3 +257,9 @@ A) Fetching some data from the backend, returned as Json data. It involves readi
 
 B) Asking the backend to perform some actions on the database, it can be used to write, update or delete
 entities.
+
+## 4.1 Database
+
+THis diagram below how data is structured inside our database and the relationships between entities
+
+![homepage](assets/data_diagram.png)
