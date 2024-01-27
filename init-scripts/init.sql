@@ -100,12 +100,11 @@ ON UPDATE CASCADE;
 /* ======================== DATA CREATION ================================ */
 
 /* ---------------------------------GUIDES ------------------------------- */
-INSERT INTO Guide (surname, biography) VALUES ('Jean-François Hêche', '');
-INSERT INTO Guide (surname, biography) VALUES ('Vincent Guidoux', '');
-INSERT INTO Guide (surname, biography) VALUES ('Olivier Lemer', '');
-INSERT INTO Guide (surname, biography) VALUES ('Fabien Dutoit', '');
-INSERT INTO Guide (surname, biography) VALUES ('Nastaran Fatemi', '');
-INSERT INTO Guide (surname, biography) VALUES ('Yassin Kamoun', '');
+INSERT INTO Guide (surname, biography) VALUES ('Jean-François Hêche', 'Will always find the shortest path to your dream destination');
+INSERT INTO Guide (surname, biography) VALUES ('Vincent Guidoux', 'As long as its fun, he is ready');
+INSERT INTO Guide (surname, biography) VALUES ('Olivier Lemer', 'Ready to fight');
+INSERT INTO Guide (surname, biography) VALUES ('Fabien Dutoit', 'Will go all the way to Mordor if needed');
+INSERT INTO Guide (surname, biography) VALUES ('Bertil Chapuis', 'Might need some coffee on the way but will always bring hapiness in the group');
 
 /* ---------------------------------CLIENTS  ----------------------------- */
 INSERT INTO Client (firstname, lastname) VALUES ('Bastian', 'Chollet');
