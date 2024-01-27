@@ -4,7 +4,7 @@ import { HistoricalPeriod } from './historicalPeriod';
 import { LifeInsurance } from './lifeInsurance';
 
 export interface JourneyDAO {
-  id: number;
+  journey_id: number;
   start_date: Date;
   end_date: Date;
   client_id: number;

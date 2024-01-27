@@ -4,7 +4,8 @@ import {
   addJourney,
   delJourney,
   getAllJourneys,
-  getJourneyById, modifyJourney,
+  getJourneyById,
+  modifyJourney,
 } from './services/journeyService';
 import { getFormInfo } from './services/formInfoService';
 import bodyParser from 'body-parser';
@@ -21,7 +22,7 @@ app.get('/journey', (req, res) => {
     res.status(200);
     if (!journeys) res.status(404);
     res.send(journeys);
-  })
+  });
 });
 
 app.get('/journey/:id', (req, res) => {
@@ -29,11 +30,11 @@ app.get('/journey/:id', (req, res) => {
     res.status(200);
     if (!journey) res.status(404);
     res.send(journey);
-  })
+  });
 });
 
-app.put('/journey/:id', (req, res) => {
-  modifyJourney(req.body).then((journey) => {
+app.put('/journey', (req, res) => {
+  modifyJourney(req.body).then(journey => {
     res.status(204);
     res.send(journey);
   });
