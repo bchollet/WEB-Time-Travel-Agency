@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import {
   addJourney,
   delJourney,
@@ -6,9 +7,14 @@ import {
   getJourneyById,
 } from './services/journeyService';
 import { getFormInfo } from './services/formInfoService';
+import bodyParser from 'body-parser';
 
 const app = express();
 const port = 3000;
+
+app.use(cors());
+
+app.use(bodyParser.json());
 
 app.get('/journey', (req, res) => {
   getAllJourneys().then(journeys => {
@@ -31,7 +37,7 @@ app.delete('/journey/:id', (req, res) => {
 });
 
 app.post('/journey', (req, res) => {
-  addJourney(req.body).then(r => {
+  addJourney(req.body).then(() => {
     res.status(201);
     res.send();
   });

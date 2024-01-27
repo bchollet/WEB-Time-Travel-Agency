@@ -21,7 +21,6 @@ export class DepartureBoardComponent implements OnInit {
     'delete',
   ];
   dataSource: Journey[] = [];
-
   loading = false;
 
   constructor(
@@ -32,31 +31,33 @@ export class DepartureBoardComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = true;
-    this.journeyService.journeysSubject.subscribe({
+    this.journeyService.getJourneys().subscribe({
       next: (journeys: Journey[]) => {
         this.dataSource = journeys;
         this.loading = false;
       },
-      error: (error: Error) => this.snackBarService.error(error.message),
+      error: (error: Error) => this.onFailure(error.message),
     });
-    this.journeyService.getJourneys();
   }
 
-  edit(journeyId: number) {
-    this.router.navigate(['create-journey', journeyId]);
+  edit(id: number) {
+    this.router.navigate(['create-journey', id]);
   }
 
-  delete(journeyId: number) {
-    this.journeyService.deleteJourney(journeyId).subscribe({
+  delete(id: number) {
+    this.loading = true;
+    this.journeyService.deleteJourneyById(id).subscribe({
       next: () => {
         this.snackBarService.success('Data deleted successfully');
-        this.dataSource = this.dataSource.filter(item => item.id !== journeyId);
+        this.dataSource = this.dataSource.filter(item => item.id !== id);
         this.loading = false;
       },
-      error: (error: Error) => {
-        this.snackBarService.error(error.message);
-        this.loading = false;
-      },
+      error: (error: Error) => this.onFailure(error.message),
     });
+  }
+
+  private onFailure(errorMessage: string) {
+    this.snackBarService.error(errorMessage);
+    this.loading = false;
   }
 }

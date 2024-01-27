@@ -26,8 +26,8 @@ export async function addJourney(journey: Journey) {
 }
 
 export async function delJourney(id: number) {
-  return await deleteJourney(id).then((dao: JourneyDAO) => {
-    console.info(`Journey with id ${dao.id} deleted`);
+  return await deleteJourney(id).then(() => {
+    console.info(`Journey with id ${id} deleted`);
   });
 }
 

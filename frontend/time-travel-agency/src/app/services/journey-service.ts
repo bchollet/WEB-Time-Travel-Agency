@@ -1,48 +1,34 @@
-import { HttpClient } from '@angular/common/http';
-import { Info, fakeInfo } from '../models/info';
-import { Observable, Subject, of, throwError } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { Journey, fakeJourney } from '../models/journey';
+import { Journey } from '../models/journey';
+import { Info } from '../models/info';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class JourneyService {
-  private info: Info | null = null;
-  infoSubject: Subject<Info> = new Subject<Info>();
-
-  private journeys: Journey[] = [];
-  journeysSubject: Subject<Journey[]> = new Subject<Journey[]>();
+  private apiUrl = environment.baseUrl;
 
   constructor(private http: HttpClient) {}
 
-  getInfo(): void {
-    this.emitInfo(fakeInfo());
+  getInfo(): Observable<Info> {
+    return this.http.get<Info>(`${this.apiUrl}/form-info`);
   }
 
-  getJourneys(): void {
-    this.emitJourneys([fakeJourney()]);
+  getJourneys(): Observable<Journey[]> {
+    return this.http.get<Journey[]>(`${this.apiUrl}/journey`);
   }
 
-  getJourney(journeyId: number): Observable<Journey> {
-    return of<Journey>(fakeJourney());
+  getJourneyById(id: number): Observable<Journey> {
+    return this.http.get<Journey>(`${this.apiUrl}/journey/${id}`);
   }
 
-  // TODO: decide with Bastian what structure to send here
-  // also what we receive
-  postJourney(): Observable<void> {
-    return throwError(() => new Error('Not implemented yet'));
+  postJourney(journey: Journey): Observable<void> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post<void>(`${this.apiUrl}/journey`, journey, { headers });
   }
 
-  // TODO: decide with Bastian what structure to send here
-  // also what we receive
-  deleteJourney(journeyId: number): Observable<void> {
-    return throwError(() => new Error('Not implemented yet'));
-  }
-
-  private emitInfo(info: Info): void {
-    this.infoSubject.next(info);
-  }
-
-  private emitJourneys(journeys: Journey[]): void {
-    this.journeysSubject.next(journeys.slice());
+  deleteJourneyById(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/journey/${id}`);
   }
 }
