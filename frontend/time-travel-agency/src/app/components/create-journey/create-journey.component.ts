@@ -66,11 +66,11 @@ export class CreateJourneyComponent implements OnInit {
       i => i.id === formValues.historicalPeriod
     );
     if (!client || !guide || !insurance || !period) {
-      this.loading = false;
+      this.onFailure('Some form values are missing.');
       return;
     }
     const journey = {
-      id: this.journeyId ? this.journeyId : 0,
+      id: this.journeyId ? this.journeyId : -1,
       startDate: formValues.startDate,
       endDate: formValues.endDate,
       historicalPeriod: period,
@@ -78,7 +78,13 @@ export class CreateJourneyComponent implements OnInit {
       lifeInsurance: insurance,
       guide: guide,
     };
-    this.journeyService.postJourney(journey).subscribe({
+
+    const obs =
+      this.journeyId != null
+        ? this.journeyService.updateJourney(journey)
+        : this.journeyService.postJourney(journey);
+
+    obs.subscribe({
       next: () => {
         this.snackBarService.success('Data saved successfully');
         this.loading = false;

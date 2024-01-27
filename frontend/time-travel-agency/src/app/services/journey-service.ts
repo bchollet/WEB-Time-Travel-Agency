@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Journey } from '../models/journey';
@@ -24,8 +24,11 @@ export class JourneyService {
   }
 
   postJourney(journey: Journey): Observable<void> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<void>(`${this.apiUrl}/journey`, journey, { headers });
+    return this.http.post<void>(`${this.apiUrl}/journey`, journey);
+  }
+
+  updateJourney(journey: Journey): Observable<void> {
+    return this.http.put<void>(`${this.apiUrl}/journey`, journey);
   }
 
   deleteJourneyById(id: number): Observable<void> {

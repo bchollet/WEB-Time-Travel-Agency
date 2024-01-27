@@ -4,13 +4,15 @@ import {
   createJourney,
   deleteJourney,
   findAllJourneys,
-  findJourneyById, updateJourney,
+  findJourneyById,
+  updateJourney,
 } from '../dataServices/journeyDataService';
 
 export async function getAllJourneys(): Promise<Journey[]> {
-  return await findAllJourneys().then((daos: JourneyDAO[]): Journey[] => {
-    return daos.map((dao: JourneyDAO): Journey => toJourneyDTO(dao));
-  })
+  return await findAllJourneys()
+    .then((daos: JourneyDAO[]): Journey[] => {
+      return daos.map((dao: JourneyDAO): Journey => toJourneyDTO(dao));
+    })
     .catch((err: Error) => {
       console.error(err);
       return [];
@@ -18,13 +20,16 @@ export async function getAllJourneys(): Promise<Journey[]> {
 }
 
 export async function getJourneyById(id: number): Promise<Journey> {
-  return await findJourneyById(id).then((dao: JourneyDAO): Journey => {
-    console.debug(`Journey with id ${dao.id} found`);
-    return toJourneyDTO(dao);
-  }).catch((err: Error) => {
-    console.error(err);
-    return null;
-  });
+  return await findJourneyById(id)
+    .then((dao: JourneyDAO): Journey => {
+      console.info(dao);
+      console.debug(`Journey with id ${dao.journey_id} found`);
+      return toJourneyDTO(dao);
+    })
+    .catch((err: Error) => {
+      console.error(err);
+      return null;
+    });
 }
 
 export async function modifyJourney(journey: Journey): Promise<Journey> {
@@ -38,35 +43,40 @@ export async function modifyJourney(journey: Journey): Promise<Journey> {
     guide_id: journey.guide.id,
   })
     .then((dao: JourneyDAO) => {
-      console.info(`Journey with id ${dao.id} updated`);
+      console.info(`Journey with id ${dao.journey_id} updated`);
       return toJourneyDTO(dao);
-    }).catch((err: Error) => {
+    })
+    .catch((err: Error) => {
       console.error(err);
       return null;
     });
 }
 
 export async function addJourney(journey: Journey): Promise<Journey> {
-  return await createJourney(toJourneyDAO(journey)).then((dao: JourneyDAO) => {
-    console.info(`Journey with id ${dao.id} created`);
-    return toJourneyDTO(dao);
-  }).catch((err: Error) => {
-    console.error(err);
-    return null
-  });
+  return await createJourney(toJourneyDAO(journey))
+    .then((dao: JourneyDAO) => {
+      console.info(`Journey with id ${dao.journey_id} created`);
+      return toJourneyDTO(dao);
+    })
+    .catch((err: Error) => {
+      console.error(err);
+      return null;
+    });
 }
 
 export async function delJourney(id: number) {
-  return await deleteJourney(id).then(() => {
-    console.info(`Journey with id ${id} deleted`);
-  }).catch((err: Error) => {
-    console.error(err);
-  });
+  return await deleteJourney(id)
+    .then(() => {
+      console.info(`Journey with id ${id} deleted`);
+    })
+    .catch((err: Error) => {
+      console.error(err);
+    });
 }
 
 export function toJourneyDTO(dao: JourneyDAO): Journey {
   return {
-    id: dao.id,
+    id: dao.journey_id,
     startDate: dao.start_date,
     endDate: dao.end_date,
     historicalPeriod: {
@@ -119,7 +129,7 @@ export function toJourneyDAO(dto: Journey): JourneyDAO {
     guide_id: dto.guide.id,
     historical_period_id: dto.historicalPeriod.id,
     hp_description: dto.historicalPeriod.description,
-    id: dto.id,
+    journey_id: dto.id,
     lastname: dto.client.lastname,
     li_description: dto.lifeInsurance.description,
     life_insurance_id: dto.lifeInsurance.id,
