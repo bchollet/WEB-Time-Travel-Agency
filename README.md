@@ -4,15 +4,15 @@
 
 This state-of-the-art web interface empowers administrators to meticulously plan and coordinate voyages for valued clients through time and space.
 
-## Key Features
+## 1 Key Features
 
-### Administrator Dashboard
+### 1.1 Administrator Dashboard
 
 ![planning](assets/planning.png)
 
 A comprehensive dashboard that serves as the nerve center, providing administrators with real-time insights into planned trips.
 
-### Voyage planification
+### 1.2 Voyage planification
 
 ![homepage](assets/creation.png)
 
@@ -245,3 +245,21 @@ curl -X GET http://api.example.com/form-info
 ```
 
 Feel free to use these examples to interact with the Time Travel Agency API. Happy time traveling!
+
+# 4 Communication
+
+This diagram explains briefly how the frontend app communicates with the backend app with http requests.
+
+![homepage](assets/communication_diagram.png)
+
+The main categories of communications are:
+A) Fetching some data from the backend, returned as Json data. It involves reading the database only.
+
+B) Asking the backend to perform some actions on the database, it can be used to write, update or delete
+entities.
+
+## 4.1 Database
+
+THis diagram below how data is structured inside our database and the relationships between entities
+
+![homepage](assets/data_diagram.png)
