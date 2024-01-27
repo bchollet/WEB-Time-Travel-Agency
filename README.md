@@ -57,7 +57,7 @@ npx tsc
 Run the JavaScript output with node:
 
 ```bash
-node dist/app.js
+node dist/src/app.js
 ```
 
 If it runs successfully, a message will be logged to the terminal:
