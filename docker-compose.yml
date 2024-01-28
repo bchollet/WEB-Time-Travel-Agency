@@ -1,31 +1,73 @@
-version: '3'
-
+version: "3"
 services:
-  backend:
-    build:
-      context: ./backend
-      dockerfile: ./Dockerfile
-    ports:
-      - "3000:3000"
-    depends_on:
-      - database
-
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: ./Dockerfile
-    ports:
-      - "8000:8000"
-    depends_on:
-      - backend
-
-  database:
-    image: postgres:latest
-    volumes:
-      - ./init-scripts:/docker-entrypoint-initdb.d/:ro
-    ports:
-      - "5432:5432"
+  postgres:
+    image: "postgres:latest"
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: postgres
+      - POSTGRES_PASSWORD=postgres_password
+  nginx:
+    depends_on:
+      - api
+      - client
+    restart: always
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./nginx
+    ports:
+      - "3050:80"
+  api:
+    build:
+      dockerfile: Dockerfile
+      context: ./backend
+    volumes:
+      - /app/node_modules
+      - ./server:/app
+    environment:
+      - PGUSER=postgres
+      - PGHOST=postgres
+      - PGDATABASE=postgres
+      - PGPASSWORD=postgres_password
+      - PGPORT=5432
+  client:
+    stdin_open: true
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    build:
+      dockerfile: Dockerfile
+      context: ./frontend/time-travel-agency
+    volumes:
+      - /app/node_modules
+      - ./client:/app
+
+
+
+#version: '3'
+#
+#services:
+#  backend:
+#    build:
+#      context: ./backend
+#      dockerfile: ./Dockerfile
+#    ports:
+#      - "3000:3000"
+#    depends_on:
+#      - database
+#
+#  frontend:
+#    build:
+#      context: ./frontend
+#      dockerfile: frontend/time-travel-agency/Dockerfile
+#    ports:
+#      - "8000:8000"
+#    depends_on:
+#      - backend
+#
+#  database:
+#    image: postgres:latest
+#    volumes:
+#      - ./init-scripts:/docker-entrypoint-initdb.d/:ro
+#    ports:
+#      - "5432:5432"
+#    environment:
+#      POSTGRES_USER: postgres
+#      POSTGRES_PASSWORD: postgres
+#      POSTGRES_DB: postgres
